@@ -1,0 +1,143 @@
+<div style="margin: 40px;">
+  <form>
+    <div class="card">
+      <h2>Cadastrar Carro</h2>
+      <hr />
+
+      <div class="p-field p-grid">
+        <label for="veiculo" class="p-col-fixed" style="width:100px">Veículo</label>
+        <div class="p-col">
+          <input id="veiculo" type="text" name="veiculo" pInputText [(ngModel)]="carro.veiculo" pInputText/>
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <label for="marca" class="p-col-fixed" style="width:100px">Marca</label>
+        <div class="p-col">
+          <input id="marca" type="text" name="marca" pInputText [(ngModel)]="carro.marca" pInputText/>
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <label for="ano" class="p-col-fixed" style="width:100px">Ano</label>
+        <div class="p-col">
+          <input id="ano" type="text" name="ano" pInputText [(ngModel)]="carro.ano" pInputText/>
+        </div>
+      </div>
+      <div class="p-field p-grid">
+        <label for="descricao" class="p-col-fixed" style="width:100px">Descrição</label>
+        <div class="p-col">
+          <input id="descricao" type="text" name="descricao" pInputText [(ngModel)]="carro.descricao" pInputText/>
+        </div>
+      </div>
+
+      <div class="p-field p-grid">
+        <label for="vendido" class="p-col-fixed" style="width:100px">Vendido</label>
+        <div class="p-col">
+          <input id="vendido" type="checkbox" [(ngModel)]="carro.vendido" name="vendido"/>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px;">
+      <p-button label="Cadastrar" (click)="cadastrar()"></p-button>
+    </div>
+
+  </form>
+
+  <h2>Carros cadastrados</h2>
+  <hr />
+  <div class="ui-g">
+    <div class="ui-g-12">
+
+      <p-table [value]="carros">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>Veiculo</th>
+            <th>Marca</th>
+            <th>Ano</th>
+            <th>Descrição</th>
+            <th>Vendido</th>
+            <th>Data Cadastro</th>
+            <th>Ações</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-car>
+          <tr>
+            <td>{{car.id}}</td>
+            <td>{{car.veiculo}}</td>
+            <td>{{car.marca}}</td>
+            <td>{{car.ano}}</td>
+            <td>{{car.descricao}}</td>
+            <td>{{car.vendido ? 'Sim' : 'Não'}}</td>
+            <td>{{car.created | date:'medium'}}</td>
+            <td>
+              <button pButton pRipple type="button" label="Atualizar" class="p-button-rounded p-button-success" (click)="atualizar(car.id)"></button>
+              <button pButton pRipple type="button" label="Remover" class="p-button-rounded p-button-danger" style="margin-top: 10px;" (click)="remover(car.id)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div>
+    <h2>Quantidade de carros não vendidos: {{qtdeNaoVendidos}}</h2>
+    <hr/>
+  </div>
+
+  <div>
+    <h2>Quantidade de carros por fabricante</h2>
+    <hr/>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-table [value]="fabricanteGrupo">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Fabricante</th>
+              <th>Quantidade</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-car>
+            <tr>
+              <td>{{car.marca}}</td>
+              <td>{{car.quantidadePorFabricante}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Novos carros</h2>
+    <hr/>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-table [value]="novosCarros">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Id</th>
+              <th>Veiculo</th>
+              <th>Marca</th>
+              <th>Ano</th>
+              <th>Descrição</th>
+              <th>Vendido</th>
+              <th>Data Cadastro</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-car>
+            <tr>
+              <td>{{car.id}}</td>
+              <td>{{car.veiculo}}</td>
+              <td>{{car.marca}}</td>
+              <td>{{car.ano}}</td>
+              <td>{{car.descricao}}</td>
+              <td>{{car.vendido ? 'Sim' : 'Não'}}</td>
+              <td>{{car.created | date:'medium'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
